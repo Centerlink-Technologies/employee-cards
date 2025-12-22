@@ -176,16 +176,113 @@ function initFormPage() {
     preview.style.display = 'none';
   }
 
+  // Initialize rich editor toolbar
+  initBioEditor();
+
   // New employee button
   const newEmployeeBtn = document.getElementById('newEmployeeBtn');
   if (newEmployeeBtn) {
     newEmployeeBtn.addEventListener('click', function() {
       form.reset();
+      const bioEditor = document.getElementById('bioEditor');
+      if (bioEditor) {
+        bioEditor.innerHTML = '';
+      }
       const preview = document.getElementById('preview');
       if (preview) {
         preview.style.display = 'none';
       }
       hideError();
+    });
+  }
+}
+
+function initBioEditor() {
+  const btnBold = document.getElementById('btnBold');
+  const btnItalic = document.getElementById('btnItalic');
+  const btnUnderline = document.getElementById('btnUnderline');
+  const btnHeading = document.getElementById('btnHeading');
+  const btnLink = document.getElementById('btnLink');
+  const btnImage = document.getElementById('btnImage');
+  const btnClearFormat = document.getElementById('btnClearFormat');
+  const bioImageUpload = document.getElementById('bioImageUpload');
+
+  if (btnBold) {
+    btnBold.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.execCommand('bold', false, null);
+    });
+  }
+
+  if (btnItalic) {
+    btnItalic.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.execCommand('italic', false, null);
+    });
+  }
+
+  if (btnUnderline) {
+    btnUnderline.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.execCommand('underline', false, null);
+    });
+  }
+
+  if (btnHeading) {
+    btnHeading.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.execCommand('formatBlock', false, '<h2>');
+    });
+  }
+
+  if (btnLink) {
+    btnLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      const url = prompt('Enter URL:');
+      if (url) {
+        document.execCommand('createLink', false, url);
+      }
+    });
+  }
+
+  if (btnImage) {
+    btnImage.addEventListener('click', function(e) {
+      e.preventDefault();
+      bioImageUpload.click();
+    });
+  }
+
+  if (btnClearFormat) {
+    btnClearFormat.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.execCommand('removeFormat', false, null);
+    });
+  }
+
+  if (bioImageUpload) {
+    bioImageUpload.addEventListener('change', function(e) {
+      const files = e.target.files;
+      if (files.length > 0) {
+        const file = files[0];
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const bioEditor = document.getElementById('bioEditor');
+          if (bioEditor) {
+            const img = document.createElement('img');
+            img.src = event.target.result;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            img.style.borderRadius = '4px';
+            img.style.margin = '10px 0';
+            img.style.display = 'block';
+            img.title = file.name;
+            bioEditor.appendChild(img);
+            bioEditor.focus();
+          }
+        };
+        reader.readAsDataURL(file);
+        bioImageUpload.value = '';
+      }
     });
   }
 }
@@ -201,13 +298,13 @@ function handleFormSubmit() {
   const title = document.getElementById('title').value.trim();
   const department = document.getElementById('department').value.trim();
   const linkedin = document.getElementById('linkedin').value.trim();
-  const bioText = document.getElementById('bioText').value.trim();
+  const bioEditor = document.getElementById('bioEditor');
+  const bioHtml = bioEditor ? bioEditor.innerHTML.trim() : '';
   const headshotInput = document.getElementById('headshot');
-  const mediaInput = document.getElementById('media');
 
   // Validate required fields
-  if (!firstName || !lastName || !email || !title || !department || !bioText) {
-    showError('Please fill in all required fields.');
+  if (!firstName || !lastName || !email || !title || !department || !bioHtml) {
+    showError('Please fill in all required fields, including a bio.');
     return;
   }
 
@@ -224,12 +321,24 @@ function handleFormSubmit() {
   const headshotExt = getFileExtension(headshotFile.name);
   const headshotFilename = 'headshot' + headshotExt;
 
-  // Build data.json
+  // Extract embedded images from bio and collect media files
+  const bioImages = extractMediaFromBio(bioHtml);
   const media = [];
-  for (let i = 0; i < mediaInput.files.length; i++) {
-    media.push(mediaInput.files[i].name);
-  }
+  let bioHtmlWithLocalPaths = bioHtml;
 
+  // Convert data URLs in bioHtml to filenames
+  bioImages.forEach(function(img, index) {
+    if (img.src.startsWith('data:')) {
+      const filename = 'bio-image-' + (index + 1) + getFileExtension(img.file.name || '.gif');
+      media.push({
+        filename: filename,
+        file: img.file
+      });
+      bioHtmlWithLocalPaths = bioHtmlWithLocalPaths.replace(img.src, filename);
+    }
+  });
+
+  // Build data.json
   const employeeData = {
     slug: slug,
     firstName: firstName,
@@ -240,8 +349,8 @@ function handleFormSubmit() {
     phone: phone || null,
     linkedin: linkedin || null,
     headshot: headshotFilename,
-    bioHtml: bioText,
-    media: media
+    bioHtml: bioHtmlWithLocalPaths,
+    media: media.map(function(m) { return m.filename; })
   };
 
   // Build vCard
@@ -251,13 +360,43 @@ function handleFormSubmit() {
   const profileUrl = buildProfileUrl(slug);
 
   // Create ZIP
-  createEmployeeZip(slug, employeeData, vcard, headshotFile, mediaInput.files)
+  createEmployeeZip(slug, employeeData, vcard, headshotFile, media)
     .then(function(zip) {
-      showFormPreview(slug, profileUrl, vcard, zip, employeeData, headshotFile, mediaInput.files);
+      showFormPreview(slug, profileUrl, vcard, zip, employeeData, headshotFile, media);
     })
     .catch(function(error) {
       showError('Error creating ZIP: ' + error.message);
     });
+}
+
+function extractMediaFromBio(bioHtml) {
+  const div = document.createElement('div');
+  div.innerHTML = bioHtml;
+  const imgs = div.querySelectorAll('img');
+  const media = [];
+
+  imgs.forEach(function(img) {
+    if (img.src.startsWith('data:')) {
+      media.push({
+        src: img.src,
+        file: dataUrlToFile(img.src, img.title || 'image.gif')
+      });
+    }
+  });
+
+  return media;
+}
+
+function dataUrlToFile(dataUrl, filename) {
+  const arr = dataUrl.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  const n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  for (let i = 0; i < n; i++) {
+    u8arr[i] = bstr.charCodeAt(i);
+  }
+  return new File([u8arr], filename, { type: mime });
 }
 
 function createEmployeeZip(slug, employeeData, vcard, headshotFile, mediaFiles) {
@@ -275,12 +414,21 @@ function createEmployeeZip(slug, employeeData, vcard, headshotFile, mediaFiles) 
     folder.file(employeeData.headshot, headshotFile);
 
     // Add media files
-    for (let i = 0; i < mediaFiles.length; i++) {
-      folder.file(mediaFiles[i].name, mediaFiles[i]);
-    }
+    let mediaProcessed = 0;
+    const totalMedia = mediaFiles.length;
 
-    // Generate ZIP blob
-    zip.generateAsync({ type: 'blob' }).then(resolve).catch(reject);
+    if (totalMedia === 0) {
+      // No media files, generate ZIP immediately
+      zip.generateAsync({ type: 'blob' }).then(resolve).catch(reject);
+    } else {
+      mediaFiles.forEach(function(media) {
+        folder.file(media.filename, media.file);
+        mediaProcessed++;
+        if (mediaProcessed === totalMedia) {
+          zip.generateAsync({ type: 'blob' }).then(resolve).catch(reject);
+        }
+      });
+    }
   });
 }
 
@@ -316,9 +464,9 @@ function showFormPreview(slug, profileUrl, vcard, zipBlob, employeeData, headsho
       slug + '/contact.vcf',
       slug + '/' + employeeData.headshot
     ];
-    for (let i = 0; i < mediaFiles.length; i++) {
-      items.push(slug + '/' + mediaFiles[i].name);
-    }
+    mediaFiles.forEach(function(media) {
+      items.push(slug + '/' + media.filename);
+    });
     items.forEach(function(item) {
       const li = document.createElement('li');
       li.textContent = item;

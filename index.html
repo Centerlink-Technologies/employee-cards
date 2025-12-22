@@ -108,15 +108,46 @@
           <legend>Profile Content</legend>
 
           <div class="form-group">
-            <label for="bioText">Bio / Description *</label>
-            <textarea
-              id="bioText"
-              name="bioText"
-              required
-              rows="6"
-              placeholder="Enter a bio. Supports basic HTML tags like <p>, <strong>, <em>, <img src='media-1.gif'> etc."
-            ></textarea>
-            <small>You can use HTML tags. Referenced images must be uploaded as media files below.</small>
+            <label for="bioEditor">Bio / Description *</label>
+            <div class="bio-editor-toolbar">
+              <button type="button" class="toolbar-btn" id="btnBold" title="Bold">
+                <strong>B</strong>
+              </button>
+              <button type="button" class="toolbar-btn" id="btnItalic" title="Italic">
+                <em>I</em>
+              </button>
+              <button type="button" class="toolbar-btn" id="btnUnderline" title="Underline">
+                <u>U</u>
+              </button>
+              <span class="toolbar-divider"></span>
+              <button type="button" class="toolbar-btn" id="btnHeading" title="Heading">
+                H1
+              </button>
+              <button type="button" class="toolbar-btn" id="btnLink" title="Insert Link">
+                Link
+              </button>
+              <button type="button" class="toolbar-btn" id="btnImage" title="Insert Image">
+                Image
+              </button>
+              <span class="toolbar-divider"></span>
+              <button type="button" class="toolbar-btn" id="btnClearFormat" title="Clear Formatting">
+                Clear
+              </button>
+            </div>
+            <div
+              id="bioEditor"
+              class="bio-editor"
+              contenteditable="true"
+              role="textbox"
+              aria-label="Bio editor"
+            ></div>
+            <small>Use the toolbar to format your bio. Insert images directly into the editor.</small>
+            <input
+              type="file"
+              id="bioImageUpload"
+              accept=".gif,.jpg,.jpeg,.png,.webp"
+              style="display: none;"
+            >
           </div>
 
           <div class="form-group">
@@ -129,18 +160,6 @@
               required
             >
             <small>Required. Will be named 'headshot.[ext]' in the ZIP.</small>
-          </div>
-
-          <div class="form-group">
-            <label for="media">Additional Media Files (gif, jpg, png, webp)</label>
-            <input
-              type="file"
-              id="media"
-              name="media"
-              accept=".gif,.jpg,.jpeg,.png,.webp"
-              multiple
-            >
-            <small>Optional. Upload images/GIFs to reference in your bio.</small>
           </div>
         </fieldset>
 
