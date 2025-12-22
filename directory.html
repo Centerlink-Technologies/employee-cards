@@ -9,16 +9,16 @@
 <body>
   <div class="container">
     <header>
-      <h1>Employee Directory</h1>
-      <p>Meet the team at Centerlink Technologies</p>
+      <div class="header-top">
+        <img src="logo.png" alt="Centerlink Technologies" class="header-logo">
+        <div class="header-text">
+          <h1>Centerlink Technologies Employee Directory</h1>
+          <p>Meet the team at Centerlink Technologies</p>
+        </div>
+      </div>
     </header>
 
     <main>
-      <nav class="nav-links" style="margin-bottom: 30px;">
-        <a href="index.html" class="btn-secondary" style="display: inline-block;">+ Add Employee</a>
-        <a href="manage.html" class="btn-secondary" style="display: inline-block;">Manage Employees</a>
-      </nav>
-
       <div id="loadingMessage" style="text-align: center; padding: 40px; font-size: 1.1rem; color: #666;">
         Loading employees...
       </div>
@@ -29,7 +29,6 @@
 
       <div id="emptyMessage" style="display: none; text-align: center; padding: 40px;">
         <p style="font-size: 1.1rem; color: #666;">No employees found yet.</p>
-        <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 15px;">Create the First Employee</a>
       </div>
 
       <div id="errorContainer" class="error-container" style="display: none;">
