@@ -88,13 +88,17 @@
 
             <div class="form-group">
               <label for="department">Department *</label>
-              <input
-                type="text"
+              <select
                 id="department"
                 name="department"
                 required
-                placeholder="IT"
               >
+                <option value="">Select Department</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Executive">Executive</option>
+                <option value="Project Management">Project Management</option>
+                <option value="Sales">Sales</option>
+              </select>
             </div>
           </div>
 
@@ -166,6 +170,10 @@
               required
             >
             <small>Required. Will be named 'headshot.[ext]' in the ZIP.</small>
+            <div id="headshotPreview" style="display: none; margin-top: 15px;">
+              <img id="headshotImage" src="" alt="Headshot Preview" style="max-width: 150px; border-radius: 6px; border: 2px solid #e0e0e0;">
+              <button type="button" id="replaceHeadshotBtn" class="btn-secondary" style="margin-top: 10px; display: inline-block;">Replace Photo</button>
+            </div>
           </div>
         </fieldset>
 

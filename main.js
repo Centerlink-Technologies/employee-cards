@@ -179,6 +179,9 @@ function initFormPage() {
   // Initialize rich editor toolbar
   initBioEditor();
 
+  // Initialize headshot preview
+  initHeadshotPreview();
+
   // New employee button
   const newEmployeeBtn = document.getElementById('newEmployeeBtn');
   if (newEmployeeBtn) {
@@ -188,11 +191,47 @@ function initFormPage() {
       if (bioEditor) {
         bioEditor.innerHTML = '';
       }
+      const headshotPreview = document.getElementById('headshotPreview');
+      if (headshotPreview) {
+        headshotPreview.style.display = 'none';
+      }
       const preview = document.getElementById('preview');
       if (preview) {
         preview.style.display = 'none';
       }
       hideError();
+    });
+  }
+}
+
+function initHeadshotPreview() {
+  const headshotInput = document.getElementById('headshot');
+  const headshotPreview = document.getElementById('headshotPreview');
+  const headshotImage = document.getElementById('headshotImage');
+  const replaceHeadshotBtn = document.getElementById('replaceHeadshotBtn');
+
+  if (!headshotInput) return;
+
+  headshotInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        if (headshotImage) {
+          headshotImage.src = event.target.result;
+        }
+        if (headshotPreview) {
+          headshotPreview.style.display = 'block';
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  if (replaceHeadshotBtn) {
+    replaceHeadshotBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      headshotInput.click();
     });
   }
 }
@@ -290,6 +329,13 @@ function initBioEditor() {
 function handleFormSubmit() {
   hideError();
 
+  // Check if JSZip is available
+  if (typeof JSZip === 'undefined') {
+    showError('Error: ZIP library is not loaded. Please ensure jszip.min.js is properly loaded.');
+    console.error('JSZip is not defined');
+    return;
+  }
+
   // Collect form data
   const firstName = document.getElementById('firstName').value.trim();
   const lastName = document.getElementById('lastName').value.trim();
@@ -366,6 +412,7 @@ function handleFormSubmit() {
     })
     .catch(function(error) {
       showError('Error creating ZIP: ' + error.message);
+      console.error('ZIP creation error:', error);
     });
 }
 
