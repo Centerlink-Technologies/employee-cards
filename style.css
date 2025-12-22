@@ -6,9 +6,10 @@
 }
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  color: #333;
-  background-color: #f9f9f9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #f5f7fa 0%, #f9f9fb 100%);
+  line-height: 1.6;
 }
 
 body {
@@ -25,34 +26,39 @@ body {
 header {
   text-align: center;
   margin-bottom: 40px;
-  padding: 30px 0;
-  border-bottom: 2px solid #e0e0e0;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #0066cc 0%, #004a99 100%);
+  color: white;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 20px rgba(0, 102, 204, 0.15);
 }
 
 header h1 {
-  font-size: 2.5rem;
-  color: #222;
-  margin-bottom: 10px;
+  font-size: 2.8rem;
+  color: white;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 header p {
   font-size: 1.1rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 main {
   background-color: white;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.08);
   margin-bottom: 40px;
 }
 
 footer {
   text-align: center;
-  padding: 20px 0;
+  padding: 30px 0;
   border-top: 1px solid #e0e0e0;
-  color: #999;
+  color: #888;
   font-size: 0.9rem;
 }
 
@@ -70,36 +76,40 @@ fieldset {
 
 legend {
   font-size: 1.3rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e0e0e0;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
   width: 100%;
+  letter-spacing: -0.3px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 28px;
 }
 
 @media (max-width: 600px) {
   .form-row {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 }
 
 label {
-  font-weight: 500;
-  margin-bottom: 8px;
-  color: #333;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #1a1a1a;
+  display: block;
+  font-size: 0.95rem;
 }
 
 input[type="text"],
@@ -108,12 +118,13 @@ input[type="tel"],
 input[type="url"],
 input[type="file"],
 textarea {
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
 }
 
 input[type="text"]:focus,
@@ -124,12 +135,101 @@ input[type="file"]:focus,
 textarea:focus {
   outline: none;
   border-color: #0066cc;
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
 }
 
 textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+/* Rich Bio Editor Styles */
+.bio-editor-toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 14px;
+  border: 2px solid #e0e0e0;
+  border-bottom: none;
+  background: linear-gradient(to bottom, #fafafa, #f5f5f5);
+  border-radius: 6px 6px 0 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.toolbar-btn {
+  background-color: white;
+  border: 1.5px solid #e0e0e0;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-btn:hover {
+  background-color: #0066cc;
+  color: white;
+  border-color: #0066cc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+}
+
+.toolbar-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 102, 204, 0.15);
+}
+
+.toolbar-divider {
+  width: 1.5px;
+  height: 24px;
+  background-color: #d0d0d0;
+  margin: 0 4px;
+}
+
+.bio-editor {
+  min-height: 280px;
+  padding: 16px;
+  border: 2px solid #e0e0e0;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  background-color: white;
+  font-size: 1rem;
+  line-height: 1.7;
+  outline: none;
+  word-wrap: break-word;
+  overflow-y: auto;
+  cursor: text;
+  transition: all 0.3s ease;
+}
+
+.bio-editor:empty:before {
+  content: 'Start typing your bio here... Use the toolbar above to format.';
+  color: #999;
+  pointer-events: none;
+}
+
+.bio-editor:focus {
+  border-color: #0066cc;
+  border-top: none;
+  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+  background-color: #fafafa;
+}
+
+.bio-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 12px 0;
+  display: block;
+  border: 1px solid #e0e0e0;
 }
 
 small {
@@ -145,40 +245,44 @@ button {
   font-size: 1rem;
   font-weight: 600;
   border: none;
-  border-radius: 4px;
-  padding: 12px 24px;
+  border-radius: 6px;
+  padding: 12px 28px;
   transition: all 0.3s ease;
+  letter-spacing: 0.3px;
 }
 
 .btn-primary {
-  background-color: #0066cc;
+  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
   color: white;
   margin-top: 10px;
-}
-
-.btn-primary:hover {
-  background-color: #0052a3;
   box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
 }
 
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 102, 204, 0.4);
+}
+
 .btn-primary:active {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 
 .btn-secondary {
-  background-color: #f0f0f0;
-  color: #333;
-  border: 1px solid #ddd;
+  background-color: #f5f5f5;
+  color: #1a1a1a;
+  border: 2px solid #e0e0e0;
   margin-top: 10px;
 }
 
 .btn-secondary:hover {
-  background-color: #e8e8e8;
-  border-color: #bbb;
+  background-color: #efefef;
+  border-color: #0066cc;
+  color: #0066cc;
+  transform: translateY(-2px);
 }
 
 .btn-secondary:active {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 
 /* Preview Container */
@@ -273,50 +377,53 @@ button {
 
 .employee-card {
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: none;
+  border-radius: 10px;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .employee-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
 }
 
 .employee-card img {
   width: 100%;
   height: 280px;
   object-fit: cover;
-  background-color: #f0f0f0;
+  background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
 }
 
 .employee-card-content {
-  padding: 15px;
+  padding: 20px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
 .employee-card-name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 4px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 6px;
 }
 
 .employee-card-title {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #0066cc;
   margin-bottom: 4px;
+  font-weight: 600;
 }
 
 .employee-card-department {
   font-size: 0.85rem;
-  color: #666;
+  color: #888;
   margin-bottom: 10px;
 }
 
