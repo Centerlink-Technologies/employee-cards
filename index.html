@@ -109,6 +109,7 @@
 
           <div class="form-group">
             <label for="bioEditor">Bio / Description *</label>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Use the toolbar below to format. Click "Image" to insert images directly into your bio.</p>
             <div class="bio-editor-toolbar">
               <button type="button" class="toolbar-btn" id="btnBold" title="Bold">
                 <strong>B</strong>
@@ -140,8 +141,8 @@
               contenteditable="true"
               role="textbox"
               aria-label="Bio editor"
+              placeholder="Start typing your bio here..."
             ></div>
-            <small>Use the toolbar to format your bio. Insert images directly into the editor.</small>
             <input
               type="file"
               id="bioImageUpload"
@@ -160,6 +161,18 @@
               required
             >
             <small>Required. Will be named 'headshot.[ext]' in the ZIP.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="media">Additional Media Files (gif, jpg, png, webp)</label>
+            <input
+              type="file"
+              id="media"
+              name="media"
+              accept=".gif,.jpg,.jpeg,.png,.webp"
+              multiple
+            >
+            <small>Optional. Upload images/GIFs to reference in your bio.</small>
           </div>
         </fieldset>
 
