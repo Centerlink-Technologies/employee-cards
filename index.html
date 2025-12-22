@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Card Generator - Centerlink Technologies</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Employee Card Generator</h1>
+      <p>Create a complete employee folder as a ZIP file ready to upload to GitHub.</p>
+    </header>
+
+    <main>
+      <form id="employeeForm" class="form-container">
+        <fieldset>
+          <legend>Personal Information</legend>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                required
+                placeholder="John"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                required
+                placeholder="Doe"
+              >
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="john@example.com"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+1-555-555-5555"
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Work Information</legend>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="title">Job Title *</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                required
+                placeholder="Systems Engineer"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="department">Department *</label>
+              <input
+                type="text"
+                id="department"
+                name="department"
+                required
+                placeholder="IT"
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="linkedin">LinkedIn URL</label>
+            <input
+              type="url"
+              id="linkedin"
+              name="linkedin"
+              placeholder="https://linkedin.com/in/johndoe"
+            >
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Profile Content</legend>
+
+          <div class="form-group">
+            <label for="bioText">Bio / Description *</label>
+            <textarea
+              id="bioText"
+              name="bioText"
+              required
+              rows="6"
+              placeholder="Enter a bio. Supports basic HTML tags like <p>, <strong>, <em>, <img src='media-1.gif'> etc."
+            ></textarea>
+            <small>You can use HTML tags. Referenced images must be uploaded as media files below.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="headshot">Headshot Image * (jpg, png, webp)</label>
+            <input
+              type="file"
+              id="headshot"
+              name="headshot"
+              accept=".jpg,.jpeg,.png,.webp"
+              required
+            >
+            <small>Required. Will be named 'headshot.[ext]' in the ZIP.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="media">Additional Media Files (gif, jpg, png, webp)</label>
+            <input
+              type="file"
+              id="media"
+              name="media"
+              accept=".gif,.jpg,.jpeg,.png,.webp"
+              multiple
+            >
+            <small>Optional. Upload images/GIFs to reference in your bio.</small>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn-primary">Generate Employee Card ZIP</button>
+      </form>
+
+      <div id="preview" class="preview-container" style="display: none;">
+        <h2>Generated Employee Card</h2>
+
+        <div class="preview-section">
+          <h3>Profile URL</h3>
+          <p id="profileUrl" class="code-block"></p>
+          <button type="button" id="copyUrlBtn" class="btn-secondary">Copy URL</button>
+        </div>
+
+        <div class="preview-section">
+          <h3>vCard Preview</h3>
+          <pre id="vcardPreview" class="code-block"></pre>
+        </div>
+
+        <div class="preview-section">
+          <h3>ZIP Contents</h3>
+          <ul id="zipContents"></ul>
+        </div>
+
+        <p class="success-message" id="successMessage"></p>
+
+        <button type="button" id="downloadZipBtn" class="btn-primary">Download ZIP</button>
+        <button type="button" id="newEmployeeBtn" class="btn-secondary">Create Another Employee</button>
+      </div>
+
+      <div id="errorContainer" class="error-container" style="display: none;">
+        <p id="errorMessage"></p>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Centerlink Technologies. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="libs/jszip.min.js"></script>
+  <script src="libs/qrcode.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

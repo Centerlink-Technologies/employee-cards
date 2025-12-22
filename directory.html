@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Directory - Centerlink Technologies</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Employee Directory</h1>
+      <p>Meet the team at Centerlink Technologies</p>
+    </header>
+
+    <main>
+      <nav class="nav-links" style="margin-bottom: 30px;">
+        <a href="index.html" class="btn-secondary" style="display: inline-block;">+ Add Employee</a>
+        <a href="manage.html" class="btn-secondary" style="display: inline-block;">Manage Employees</a>
+      </nav>
+
+      <div id="loadingMessage" style="text-align: center; padding: 40px; font-size: 1.1rem; color: #666;">
+        Loading employees...
+      </div>
+
+      <div id="directoryGrid" class="directory-grid" style="display: none;">
+        <!-- Employee cards will be inserted here by main.js -->
+      </div>
+
+      <div id="emptyMessage" style="display: none; text-align: center; padding: 40px;">
+        <p style="font-size: 1.1rem; color: #666;">No employees found yet.</p>
+        <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 15px;">Create the First Employee</a>
+      </div>
+
+      <div id="errorContainer" class="error-container" style="display: none;">
+        <p id="errorMessage"></p>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Centerlink Technologies. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
