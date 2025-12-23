@@ -2,7 +2,7 @@
 
 A static, no-backend employee directory and profile system hosted on GitHub Pages. Employees are stored as simple folder structures, and IT can manage the directory using only the GitHub web interface.
 
-**Live Site:** https://centerlink-technologies.github.io/employee-cards/
+**Live Site:**https://centerlink-technologies.github.io/employee-cards/directory.html
 
 ## What Is This?
 
@@ -265,3 +265,4 @@ Examples:
 
 **Last Updated:** December 2025  
 **Project:** Employee Cards Directory v1.0
+
