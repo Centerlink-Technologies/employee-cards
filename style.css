@@ -33,6 +33,13 @@ header {
   box-shadow: 0 4px 20px rgba(0, 102, 204, 0.15);
 }
 
+@media (max-width: 600px) {
+  header {
+    padding: 30px 15px;
+    margin-bottom: 30px;
+  }
+}
+
 .header-top {
   display: flex;
   align-items: center;
@@ -40,13 +47,32 @@ header {
   gap: 30px;
 }
 
+@media (max-width: 600px) {
+  .header-top {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
 .header-logo {
   max-width: 120px;
   height: auto;
 }
 
+@media (max-width: 600px) {
+  .header-logo {
+    max-width: 90px;
+  }
+}
+
 .header-text {
   text-align: left;
+}
+
+@media (max-width: 600px) {
+  .header-text {
+    text-align: center;
+  }
 }
 
 header h1 {
@@ -57,9 +83,21 @@ header h1 {
   letter-spacing: -0.5px;
 }
 
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+}
+
 header p {
   font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 600px) {
+  header p {
+    font-size: 0.95rem;
+  }
 }
 
 main {
@@ -68,6 +106,14 @@ main {
   padding: 40px;
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.08);
   margin-bottom: 40px;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+  }
 }
 
 footer {
@@ -105,6 +151,12 @@ legend {
   display: flex;
   flex-direction: column;
   margin-bottom: 28px;
+}
+
+@media (max-width: 600px) {
+  .form-group {
+    margin-bottom: 20px;
+  }
 }
 
 .form-row {
@@ -179,6 +231,13 @@ textarea {
   align-items: center;
 }
 
+@media (max-width: 600px) {
+  .bio-editor-toolbar {
+    gap: 6px;
+    padding: 10px;
+  }
+}
+
 .toolbar-btn {
   background-color: white;
   border: 1.5px solid #e0e0e0;
@@ -194,6 +253,15 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .toolbar-btn {
+    padding: 6px 10px;
+    min-width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
 }
 
 .toolbar-btn:hover {
@@ -216,6 +284,12 @@ textarea {
   margin: 0 4px;
 }
 
+@media (max-width: 600px) {
+  .toolbar-divider {
+    display: none;
+  }
+}
+
 .bio-editor {
   min-height: 280px;
   padding: 16px;
@@ -230,6 +304,14 @@ textarea {
   overflow-y: auto;
   cursor: text;
   transition: all 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .bio-editor {
+    min-height: 200px;
+    padding: 12px;
+    font-size: 0.95rem;
+  }
 }
 
 .bio-editor:empty:before {
@@ -273,11 +355,25 @@ button {
   letter-spacing: 0.3px;
 }
 
+@media (max-width: 600px) {
+  button {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+  }
+}
+
 .btn-primary {
   background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
   color: white;
   margin-top: 10px;
   box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+@media (max-width: 600px) {
+  .btn-primary {
+    margin-top: 8px;
+  }
 }
 
 .btn-primary:hover {
@@ -294,6 +390,12 @@ button {
   color: #1a1a1a;
   border: 2px solid #e0e0e0;
   margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .btn-secondary {
+    margin-top: 8px;
+  }
 }
 
 .btn-secondary:hover {
