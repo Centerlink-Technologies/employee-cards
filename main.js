@@ -7,10 +7,12 @@
 // Configuration
 // ===========================
 
-const EMPLOYEE_SLUGS = ["mykal-mills", "jane-smith"];
+const EMPLOYEE_SLUGS = ["john-doe", "jane-smith"];
 
 // Base URL for the site (deployed at /employee-cards/)
 const BASE_URL = '/employee-cards';
+// Full URL for QR codes (absolute URL)
+const FULL_BASE_URL = 'https://centerlink-technologies.github.io/employee-cards';
 
 // ===========================
 // Utility Functions
@@ -45,7 +47,7 @@ function generateSlug(firstName, lastName) {
  * @returns {string} - Full profile URL
  */
 function buildProfileUrl(slug) {
-  return BASE_URL + '/profile.html?person=' + encodeURIComponent(slug);
+  return FULL_BASE_URL + '/profile.html?person=' + encodeURIComponent(slug);
 }
 
 /**
@@ -989,4 +991,3 @@ document.addEventListener('DOMContentLoaded', function() {
     initManagePage();
   }
 });
-
