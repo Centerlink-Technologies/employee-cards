@@ -53,7 +53,6 @@ Before adding employees, verify everything is working:
 
 - **Form page:** https://centerlink-technologies.github.io/employee-cards/
 - **Directory page:** https://centerlink-technologies.github.io/employee-cards/directory.html
-- **Manage page:** https://centerlink-technologies.github.io/employee-cards/manage.html
 - **Example profile:** https://centerlink-technologies.github.io/employee-cards/profile.html?person=john-doe
 
 ---
@@ -229,5 +228,6 @@ Examples:
 
 **Last Updated:** December 2025  
 **Project:** Employee Cards Directory v1.0
+
 
 
