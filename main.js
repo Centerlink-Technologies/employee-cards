@@ -7,7 +7,7 @@
 // Configuration
 // ===========================
 
-const EMPLOYEE_SLUGS = ["john-doe", "jane-smith"];
+const EMPLOYEE_SLUGS = ["mykal-mills", "jane-smith"];
 
 // Base URL for the site (deployed at /employee-cards/)
 const BASE_URL = '/employee-cards';
@@ -991,3 +991,4 @@ document.addEventListener('DOMContentLoaded', function() {
     initManagePage();
   }
 });
+
