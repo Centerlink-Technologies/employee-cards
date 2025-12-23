@@ -45,42 +45,6 @@ This is a **public-facing employee directory** that allows:
 - `headshot.jpg/png/webp` — Profile photo
 - Optional media files (GIFs, JPGs, PNGs, WebPs) for the bio
 
-## Deployment to GitHub Pages
-
-### Step 1: Create a GitHub Repository
-
-1. Go to https://github.com/new
-2. Name it: `employee-cards`
-3. Click **Create Repository**
-
-### Step 2: Set Up GitHub Pages
-
-1. Go to your repository: https://github.com/centerlink-technologies/employee-cards
-2. Click **Settings** (gear icon, top right)
-3. In the left menu, click **Pages**
-4. Under "Build and deployment":
-   - **Source** → Select **Deploy from a branch**
-   - **Branch** → Select **main** and folder **(root)**
-   - Click **Save**
-5. Wait 1–2 minutes. You'll see a green checkmark with your live URL:  
-   `https://centerlink-technologies.github.io/employee-cards/`
-
-### Step 3: Upload Project Files to GitHub (Web UI)
-
-1. Go to your repository home: https://github.com/centerlink-technologies/employee-cards
-2. Click **Add file** → **Upload files**
-3. Drag and drop (or select) these files/folders:
-   - `index.html`
-   - `directory.html`
-   - `profile.html`
-   - `manage.html`
-   - `style.css`
-   - `main.js`
-   - `/libs/` folder (with `jszip.min.js` and `qrcode.min.js`)
-   - `/example/` folder (optional, for reference)
-4. Click **Commit changes**
-5. Your site is now live! ✅
-
 ## IT Workflow: Managing Employees
 
 ### Test the Site First
@@ -265,4 +229,5 @@ Examples:
 
 **Last Updated:** December 2025  
 **Project:** Employee Cards Directory v1.0
+
 
