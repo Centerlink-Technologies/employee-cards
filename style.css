@@ -748,18 +748,69 @@ button {
   margin: 0 auto;
 }
 
+/* QR Code Modal */
+.qrcode-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.qrcode-modal-content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.qrcode-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.qrcode-modal-close:hover {
+  color: #333;
+}
+
+#qrcodeModalContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#qrcodeModalContainer canvas {
+  max-width: 100%;
+  height: auto;
+}
+
 .profile-footer {
   display: grid;
   grid-template-columns: 1fr 250px;
   gap: 30px;
   margin-top: 40px;
   align-items: start;
+  max-width: 700px;
 }
 
 @media (max-width: 600px) {
   .profile-footer {
     grid-template-columns: 1fr;
     gap: 20px;
+    max-width: 100%;
   }
 }
 

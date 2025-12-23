@@ -53,7 +53,7 @@
             </div>
             <div class="profile-meta">
               <div class="profile-meta-item">
-                <span class="profile-meta-label">Website:</span>
+                <span class="profile-meta-label">Company:</span>
                 <a class="profile-meta-value" href="https://centerlinktechnologies.com" target="_blank">Centerlink Technologies</a>
               </div>
             </div>
@@ -81,10 +81,19 @@
           <!-- QR Code -->
           <div class="profile-footer-qr">
             <h3 style="text-align: center; margin-bottom: 10px;">Share Profile</h3>
-            <div class="profile-qrcode">
+            <div class="profile-qrcode" id="qrcodeWrapper" style="cursor: pointer;">
               <div id="qrcodeContainer"></div>
               <small style="color: #666; display: block; margin-top: 10px;">Scan to visit profile</small>
             </div>
+          </div>
+        </div>
+
+        <!-- QR Code Modal -->
+        <div id="qrcodeModal" class="qrcode-modal" style="display: none;">
+          <div class="qrcode-modal-content">
+            <span class="qrcode-modal-close">&times;</span>
+            <div id="qrcodeModalContainer"></div>
+            <small style="color: #999; display: block; margin-top: 15px; text-align: center;">Scan to visit profile</small>
           </div>
         </div>
 
@@ -111,4 +120,3 @@
   <script src="main.js"></script>
 </body>
 </html>
-

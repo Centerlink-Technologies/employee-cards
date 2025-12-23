@@ -7,7 +7,7 @@
 // Configuration
 // ===========================
 
-const EMPLOYEE_SLUGS = ["mykal-mills", "jane-smith"];
+const EMPLOYEE_SLUGS = ["john-doe", "jane-smith"];
 
 // Base URL for the site (deployed at /employee-cards/)
 const BASE_URL = '/employee-cards';
@@ -797,6 +797,7 @@ function renderProfile(employee) {
 
   // QR Code
   const qrcodeContainer = document.getElementById('qrcodeContainer');
+  const qrcodeModalContainer = document.getElementById('qrcodeModalContainer');
   if (qrcodeContainer && window.QRCode) {
     const profileUrl = buildProfileUrl(employee.slug);
     new QRCode(qrcodeContainer, {
@@ -807,6 +808,39 @@ function renderProfile(employee) {
       colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.H
     });
+    
+    // Generate larger QR code for modal
+    if (qrcodeModalContainer) {
+      new QRCode(qrcodeModalContainer, {
+        text: profileUrl,
+        width: 350,
+        height: 350,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+    
+    // Set up click handler for QR code
+    const qrcodeWrapper = document.getElementById('qrcodeWrapper');
+    const qrcodeModal = document.getElementById('qrcodeModal');
+    const qrcodeModalClose = document.querySelector('.qrcode-modal-close');
+    
+    if (qrcodeWrapper && qrcodeModal) {
+      qrcodeWrapper.addEventListener('click', function() {
+        qrcodeModal.style.display = 'flex';
+      });
+      
+      qrcodeModalClose.addEventListener('click', function() {
+        qrcodeModal.style.display = 'none';
+      });
+      
+      qrcodeModal.addEventListener('click', function(e) {
+        if (e.target === qrcodeModal) {
+          qrcodeModal.style.display = 'none';
+        }
+      });
+    }
   }
 }
 
@@ -991,4 +1025,3 @@ document.addEventListener('DOMContentLoaded', function() {
     initManagePage();
   }
 });
-
